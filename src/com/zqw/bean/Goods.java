@@ -10,30 +10,7 @@ public class Goods {
 	private String bankCard;
 	private String remark;
 
-	public Goods(int id, String serialNumber, double purchasePrice,
-			String factory, String telephone, String bankCard,String remark) {
-		super();
-		this.id = id;
-		this.serialNumber = serialNumber;
-		this.purchasePrice = purchasePrice;
-		this.factory = factory;
-		this.telephone = telephone;
-		this.bankCard = bankCard;
-		this.remark = remark;
-	}
 
-	public Goods(String serialNumber, double purchasePrice, String factory,
-			String telephone, String distance) {
-		super();
-		this.serialNumber = serialNumber;
-		this.purchasePrice = purchasePrice;
-		this.factory = factory;
-		this.telephone = telephone;
-		this.distance = distance;
-	}
-
-
-	
 	public String getRemark() {
 		return remark;
 	}
@@ -83,7 +60,7 @@ public class Goods {
 	}
 
 	public Goods() {
-	};
+	}
 
 	public String getSerialNumber() {
 		return serialNumber;

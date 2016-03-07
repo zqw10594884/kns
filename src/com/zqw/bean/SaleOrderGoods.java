@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 
-public class OrderGoods {
+public class SaleOrderGoods {
 	private int id;
 	private String serialNumber;
 	private double sellingPrice;
@@ -13,12 +13,12 @@ public class OrderGoods {
 	private String curtainShop;
 	private int orderId;
 	private int owner;
-	private OrderLst order;
+	private SaleOrderLst order;
 	private Date date;
 	private String remark;
 	
 
-	public OrderGoods(String serialNumber, double sellingPrice,
+	public SaleOrderGoods(String serialNumber, double sellingPrice,
 			double purchasePrice, double number, String curtainShop, int owner,String remark) {
 		super();
 		this.serialNumber = serialNumber;
@@ -32,7 +32,7 @@ public class OrderGoods {
 	
 	
 
-	public OrderGoods(String serialNumber, double sellingPrice,
+	public SaleOrderGoods(String serialNumber, double sellingPrice,
 			double purchasePrice, double number,Date date) {
 		super();
 		this.serialNumber = serialNumber;
@@ -42,7 +42,7 @@ public class OrderGoods {
 		this.date = date;
 	}
 	
-	public OrderGoods(String serialNumber, double sellingPrice,
+	public SaleOrderGoods(String serialNumber, double sellingPrice,
 			double purchasePrice, double number) {
 		super();
 		this.serialNumber = serialNumber;
@@ -51,7 +51,7 @@ public class OrderGoods {
 		this.number = number;
 	}
 
-	public OrderGoods(String serialNumber, double sellingPrice,
+	public SaleOrderGoods(String serialNumber, double sellingPrice,
 			double purchasePrice, double number,int orderId) {
 		super();
 		this.serialNumber = serialNumber;
@@ -106,11 +106,11 @@ public class OrderGoods {
 		this.orderId = orderId;
 	}
 
-	public OrderLst getOrder() {
+	public SaleOrderLst getOrder() {
 		return order;
 	}
 
-	public void setOrder(OrderLst order) {
+	public void setOrder(SaleOrderLst order) {
 		this.order = order;
 	}
 
@@ -122,7 +122,7 @@ public class OrderGoods {
 		this.serialNumber = serialNumber;
 	}
 
-	public OrderGoods() {
+	public SaleOrderGoods() {
 		super();
 	}
 

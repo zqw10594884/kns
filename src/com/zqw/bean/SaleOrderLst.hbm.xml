@@ -3,7 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="com.zqw.bean">
-	<class name="OrderLst" table="_order" lazy="true">
+	<class name="SaleOrderLst" table="_saleorderlst" lazy="true">
 		<id name="id">
 			<generator class="increment" />
 		</id>

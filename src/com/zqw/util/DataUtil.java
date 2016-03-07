@@ -7,17 +7,17 @@ import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 
-import com.zqw.bean.OrderGoods;
-import com.zqw.bean.OrderLst;
+import com.zqw.bean.SaleOrderGoods;
+import com.zqw.bean.SaleOrderLst;
 
 public class DataUtil {
-	public static int getProfit(OrderLst order){
+	public static int getProfit(SaleOrderLst order){
 		return getProfit(order.getGoodsLst());
 	}
-	public static int getProfit(List<OrderGoods> lst) {
+	public static int getProfit(List<SaleOrderGoods> lst) {
 		double total = 0;
 		for (int i = 0; i < lst.size(); i++) {
-			OrderGoods g = lst.get(i);
+			SaleOrderGoods g = lst.get(i);
 			if ("免费样品".equals(g.getRemark())) {
 				// do null;
 			} else {
@@ -27,13 +27,13 @@ public class DataUtil {
 		}
 		return (int) total;
 	}
-	public static int getTotal(OrderLst order){
+	public static int getTotal(SaleOrderLst order){
 		return getTotal(order.getGoodsLst());
 	}
-	public static int getTotal(List<OrderGoods> lst) {
+	public static int getTotal(List<SaleOrderGoods> lst) {
 		double total = 0;
 		for (int i = 0; i < lst.size(); i++) {
-			OrderGoods g = lst.get(i);
+			SaleOrderGoods g = lst.get(i);
 			if ("免费样品".equals(g.getRemark())) {
 				// do null;
 			} else {

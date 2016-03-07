@@ -1,13 +1,12 @@
 package com.zqw.bean;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class OrderLst {
-	private List<OrderGoods> goodsLst;
-	private String curtainShop;
+public class SaleOrderLst {
+	private List<SaleOrderGoods> goodsLst;
+	private String saleCustomer;
 	private String untreatedPerson;
 	private Date date;
 	private Date submitTime;
@@ -15,20 +14,9 @@ public class OrderLst {
 	private int arrears;
 	private int orderState;
 
-	public OrderLst() {
+	public SaleOrderLst() {
 		super();
 	}
-
-	public OrderLst(int arrears, String curtainShop, Date date, int id, int orderState) {
-		super();
-		this.curtainShop = curtainShop;
-		this.date = date;
-		this.id = id;
-		this.arrears = arrears;
-		this.orderState = orderState;
-	}
-
-
 
 	public String getUntreatedPerson() {
 		return untreatedPerson;
@@ -67,12 +55,12 @@ public class OrderLst {
 		this.arrears = arrears;
 	}
 
-	public String getCurtainShop() {
-		return curtainShop;
+	public String getSaleCustomer() {
+		return saleCustomer;
 	}
 
-	public void setCurtainShop(String curtainShop) {
-		this.curtainShop = curtainShop;
+	public void setSaleCustomer(String saleCustomer) {
+		this.saleCustomer = saleCustomer;
 	}
 
 	public Date getDate() {
@@ -96,11 +84,11 @@ public class OrderLst {
 		this.id = id;
 	}
 
-	public List<OrderGoods> getGoodsLst() {
+	public List<SaleOrderGoods> getGoodsLst() {
 		return goodsLst;
 	}
 
-	public void setGoodsLst(List<OrderGoods> goodsLst) {
+	public void setGoodsLst(List<SaleOrderGoods> goodsLst) {
 		this.goodsLst = goodsLst;
 	}
 
