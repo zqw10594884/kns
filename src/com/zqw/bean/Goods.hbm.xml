@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.zqw.bean">
+	<class name="Goods" table="_goods" lazy="true">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="serialNumber" type="string" column="_serialNumber" />
+		<property name="factory" type="string" column="_factory" />
+		<property name="telephone" type="string" column="_telephone" />
+		<property name="purchasePrice" type="double" column="_purchasePrice" />
+		<property name="distance" type="string" column="_distance" not-null="false"/>
+		<property name="bankCard" type="string" column="_bankCard" />
+		<property name="remark" type="string" column="_remark" />
+	</class>
+
+</hibernate-mapping>
+

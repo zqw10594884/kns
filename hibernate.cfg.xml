@@ -1,0 +1,28 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="show_sql">true</property>
+		<property name="hibernate.dialect">
+			com.zqw.util.MySQL5LocalDialect
+		</property>
+		<property name="connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<property name="hibernate.connection.url">
+			jdbc:mysql://123.56.246.226:3306/kns?useUnicode=true&amp;characterEncoding=utf8
+		</property>
+		<property name="connection.username">knsonline</property>
+		<property name="connection.password">zqw110119</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<mapping resource="com/zqw/bean/CurtainShop.hbm.xml" />
+		<mapping resource="com/zqw/bean/Goods.hbm.xml" />
+		<mapping resource="com/zqw/bean/CurtainShopGoods.hbm.xml" />
+		<mapping resource="com/zqw/bean/OrderLst.hbm.xml" />
+		<mapping resource="com/zqw/bean/OrderGoods.hbm.xml" />
+		<mapping resource="com/zqw/bean/User.hbm.xml" />
+		<mapping resource="com/zqw/bean/PurchaseOrder.hbm.xml" />
+
+	</session-factory>
+</hibernate-configuration>
