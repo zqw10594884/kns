@@ -8,13 +8,11 @@
 			<generator class="increment" />
 		</id>
 		<property name="serialNumber" type="string" column="_serialNumber" />
-		<property name="curtainShop" type="string" column="_curtainShop" />
+		<property name="saleCustomer" type="string" column="_saleCustomer" />
 		<property name="sellingPrice" type="double" column="_sellingPrice" />
 		<property name="purchasePrice" type="double" column="_purchasePrice" />
 		<property name="number" type="double" column="_number" />
 		<property name="orderId" type="integer" column="_orderId" />
-		<property name="owner" type="integer" column="_owner" />
-		<property name="date" type="date" column="_date" />
 		<property name="remark" type="string" column="_remark" />
 		<many-to-one name="order" class="com.zqw.bean.OrderLst"
 			column="Order_id" cascade="none"></many-to-one>
