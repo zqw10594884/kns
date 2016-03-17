@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 public class DBUtil {
@@ -72,7 +73,8 @@ public class DBUtil {
 		return obj;
 	}
 
-	public static Object getClassLst(String sql, String name0, Date name1, Date name2) {
+	public static Object getClassLst(String sql, String name0, Date name1,
+			Date name2) {
 
 		Session session = null;
 		Object obj = null;
@@ -130,7 +132,8 @@ public class DBUtil {
 	 *            eq是等于，gt是大于，lt是小于,or是或
 	 * @return
 	 */
-	public static Object getClass(Class arg0, String name0, String nameArg0, String par) {
+	public static Object getClass(Class arg0, String name0, String nameArg0,
+			String par) {
 		Session session = null;
 		Object obj = null;
 		try {
@@ -156,29 +159,42 @@ public class DBUtil {
 
 	/**
 	 * 
-	 * @param arg0
+	 * @param order
+	 *            排序属性
 	 * @param par
 	 *            eq是等于，gt是大于，lt是小于,or是或
+	 * @param arg0
+	 *            类名
 	 * @param nameArg0
+	 *            "curtainShop", order.getCurtainShop(), "String"
 	 * @return
 	 */
-	public static Object getLstClass(Class arg0, String par, String... nameArg0) {
+	public static Object getLstClass(String order, String par, Class arg0,
+			String... nameArg0) {
 		Session session = null;
 		Object obj = null;
 		try {
 			session = HibUtil.getSession();
 			Criteria c = session.createCriteria(arg0);
-			for (int i = 0; i < nameArg0.length; i += 3) {
-				if ("eq".endsWith(par)) {
-					if (nameArg0[i + 2].endsWith("int")) {
-						c.add(Restrictions.eq(nameArg0[i], Integer.parseInt(nameArg0[i + 1])));
-					}else{
-						c.add(Restrictions.eq(nameArg0[i], nameArg0[i + 1]));
+			if (order.length() > 0) {
+				c.addOrder(Order.asc(order));
+			}
+			if (nameArg0.length>2){
+				for (int i = 0; i < nameArg0.length; i += 3) {
+					if ("eq".endsWith(par)) {
+						if (nameArg0[i + 2].endsWith("int")) {
+							c.add(Restrictions.eq(nameArg0[i],
+									Integer.parseInt(nameArg0[i + 1])));
+						} else {
+							c.add(Restrictions.eq(nameArg0[i], nameArg0[i + 1]));
+						}
+					} else if ("gt".endsWith(par)) {
+						c.add(Restrictions.gt(nameArg0[i],
+								Integer.parseInt(nameArg0[i + 1])));
+					} else if ("lt".endsWith(par)) {
+						c.add(Restrictions.lt(nameArg0[i],
+								Integer.parseInt(nameArg0[i + 1])));
 					}
-				} else if ("gt".endsWith(par)) {
-					c.add(Restrictions.gt(nameArg0[i], Integer.parseInt(nameArg0[i + 1])));
-				} else if ("lt".endsWith(par)) {
-					c.add(Restrictions.lt(nameArg0[i], Integer.parseInt(nameArg0[i + 1])));
 				}
 			}
 			obj = c.list();
