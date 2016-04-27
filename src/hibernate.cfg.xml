@@ -18,6 +18,7 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<mapping resource="com/zqw/bean/CurtainShopGoods.hbm.xml" />
 		<mapping resource="com/zqw/bean/User.hbm.xml" />
-
+		<mapping resource="com/zqw/bean/SaleOrderGoods.hbm.xml" />
+		<mapping resource="com/zqw/bean/SaleOrderLst.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

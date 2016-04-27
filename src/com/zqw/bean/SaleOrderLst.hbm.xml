@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.zqw.bean">
+	<class name="SaleOrderLst" table="_saleorderlst" lazy="true">
+		<id name="id">
+			<generator class="increment" />
+		</id>
+		<property name="saleCustomer" type="string" column="_saleCustomer" />
+		<property name="untreatedPerson" type="string" column="_untreatedPerson" />
+		<property name="date" type="date" column="_date" />
+		<property name="submitTime" type="date" column="_submitTime" />
+		<property name="orderState" type="int" column="_orderState" />
+		<property name="arrears" type="int" column="_arrears" />
+		<list name="goodsLst" cascade="all" lazy="false">
+			<key column="Order_id"></key>
+			<index column="index_"></index>
+			<one-to-many class="com.zqw.bean.SaleOrderGoods"/>
+		</list>
+	</class>
+
+</hibernate-mapping>
+
