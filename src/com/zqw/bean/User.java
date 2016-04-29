@@ -1,6 +1,12 @@
 package com.zqw.bean;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6299889601651926515L;
 	private int id;
 	private String name;
 	private String password;

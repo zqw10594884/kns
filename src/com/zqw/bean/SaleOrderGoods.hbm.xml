@@ -8,7 +8,6 @@
 			<generator class="increment" />
 		</id>
 		<property name="serialNumber" type="string" column="_serialNumber" />
-		<property name="saleCustomer" type="string" column="_saleCustomer" />
 		<property name="sellingPrice" type="double" column="_sellingPrice" />
 		<property name="purchasePrice" type="double" column="_purchasePrice" />
 		<property name="number" type="double" column="_number" />

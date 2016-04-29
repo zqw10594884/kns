@@ -9,6 +9,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 
 import com.zqw.bean.CurtainShopGoods;
+import com.zqw.bean.MyListRenderer;
 import com.zqw.util.DBUtil;
 
 public class UIutil {
@@ -30,7 +31,6 @@ public class UIutil {
 		ArrayList<String> item = new ArrayList<String>();
 		for (int i = 0; i < goodsLst.size(); i++) {
 			item.add(goodsLst.get(i).getSerialNumber());
-			System.out.println(goodsLst.get(i).getSerialNumber());
 		}
 		initJlist(mainWi, goodsjList, item);
 	}
@@ -42,6 +42,7 @@ public class UIutil {
 			lm.addElement(item.get(i));
 		}
 		jList.setModel(lm);
+		jList.setCellRenderer(new MyListRenderer());
 		jList.removeListSelectionListener(UI);
 		jList.addListSelectionListener(UI);
 		jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

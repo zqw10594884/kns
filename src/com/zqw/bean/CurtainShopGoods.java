@@ -1,6 +1,12 @@
 package com.zqw.bean;
 
-public class CurtainShopGoods {
+import java.io.Serializable;
+
+public class CurtainShopGoods implements Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4463129217104178666L;
 	private int id;
 	private String serialNumber;
 	private double sellingPrice;

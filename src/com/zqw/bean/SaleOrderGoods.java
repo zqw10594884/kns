@@ -1,33 +1,23 @@
 package com.zqw.bean;
 
-public class SaleOrderGoods {
+import java.io.Serializable;
+
+public class SaleOrderGoods implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9090137554867652787L;
 	private int id;
 	private String serialNumber;
 	private double sellingPrice;
 	private double purchasePrice;
 	private double number;
-	private String saleCustomer;
 	private int orderId;
 	private SaleOrderLst order;
 	private String remark;
 
 	public SaleOrderGoods() {
 		super();
-	}
-
-	public SaleOrderGoods(int id, String serialNumber, double sellingPrice,
-			double purchasePrice, double number, String saleCustomer,
-			int orderId, SaleOrderLst order, String remark) {
-		super();
-		this.id = id;
-		this.serialNumber = serialNumber;
-		this.sellingPrice = sellingPrice;
-		this.purchasePrice = purchasePrice;
-		this.number = number;
-		this.saleCustomer = saleCustomer;
-		this.orderId = orderId;
-		this.order = order;
-		this.remark = remark;
 	}
 
 	public int getId() {
@@ -68,14 +58,6 @@ public class SaleOrderGoods {
 
 	public void setNumber(double number) {
 		this.number = number;
-	}
-
-	public String getSaleCustomer() {
-		return saleCustomer;
-	}
-
-	public void setSaleCustomer(String saleCustomer) {
-		this.saleCustomer = saleCustomer;
 	}
 
 	public int getOrderId() {

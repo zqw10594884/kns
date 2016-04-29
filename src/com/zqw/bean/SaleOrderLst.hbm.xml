@@ -7,12 +7,12 @@
 		<id name="id">
 			<generator class="increment" />
 		</id>
-		<property name="saleCustomer" type="string" column="_saleCustomer" />
-		<property name="untreatedPerson" type="string" column="_untreatedPerson" />
-		<property name="date" type="date" column="_date" />
+		<property name="customerName" type="string" column="_customerName" />
+		<property name="customerTel1" type="string" column="_customerTel1" />
+		<property name="customerTel2" type="string" column="_customerTel2" />
+		<property name="customerDeposit" type="string" column="_customerDeposit" />
+		<property name="customerAddress" type="string" column="_customerAddress" />
 		<property name="submitTime" type="date" column="_submitTime" />
-		<property name="orderState" type="int" column="_orderState" />
-		<property name="arrears" type="int" column="_arrears" />
 		<list name="goodsLst" cascade="all" lazy="false">
 			<key column="Order_id"></key>
 			<index column="index_"></index>
