@@ -9,13 +9,13 @@ public class SaleOrderLst implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2580071960678810011L;
 	private List<SaleOrderGoods> goodsLst;
 	private String customerName;
 	private String customerTel1;
 	private String customerTel2;
 	private String customerDeposit;
 	private String customerAddress;
+
 	private Date submitTime;
 	private int id;
 
@@ -78,6 +78,9 @@ public class SaleOrderLst implements Serializable {
 	public void setSubmitTime(Date submitTime) {
 		this.submitTime = submitTime;
 	}
+
+	
+	
 
 	public int getId() {
 		return id;

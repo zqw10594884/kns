@@ -7,12 +7,45 @@
 		<id name="id">
 			<generator class="increment" />
 		</id>
-		<property name="serialNumber" type="string" column="_serialNumber" />
-		<property name="sellingPrice" type="double" column="_sellingPrice" />
-		<property name="purchasePrice" type="double" column="_purchasePrice" />
-		<property name="number" type="double" column="_number" />
+		<property name="clothSerialNumber" type="string" column="_clothSerialNumber" />
+		<property name="clothSellingPrice" type="double" column="_clothSellingPrice" />
+		<property name="clothNumber" type="double" column="_clothNumber" />
+		<property name="clothRemark" type="string" column="_clothRemark" />
+
+		<property name="curtainTapeSerialNumber" type="string"
+			column="_curtainTapeSerialNumber" />
+		<property name="curtainTapeSellingPrice" type="double"
+			column="_curtainTapeSellingPrice" />
+		<property name="curtainTapeNumber" type="double" column="_curtainTapeNumber" />
+		<property name="curtainTapeRemark" type="string" column="_curtainTapeRemark" />
+
+		<property name="curtainLaceSerialNumber" type="string"
+			column="_curtainLaceSerialNumber" />
+		<property name="curtainLaceSellingPrice" type="double"
+			column="_curtainLaceSellingPrice" />
+		<property name="curtainLaceNumber" type="double" column="_curtainLaceNumber" />
+		<property name="curtainLaceRemark" type="string" column="_curtainLaceRemark" />
+
+		<property name="curtainRingSerialNumber" type="string"
+			column="_curtainRingSerialNumber" />
+		<property name="curtainRingSellingPrice" type="double"
+			column="_curtainRingSellingPrice" />
+		<property name="curtainRingNumber" type="double" column="_curtainRingNumber" />
+		<property name="curtainRingRemark" type="string" column="_curtainRingRemark" />
+
+		<property name="curtainRodSerialNumber" type="string"
+			column="_curtainRodSerialNumber" />
+		<property name="curtainRodSellingPrice" type="double"
+			column="_curtainRodSellingPrice" />
+		<property name="curtainRodNumber" type="double" column="_curtainRodNumber" />
+		<property name="curtainRodRemark" type="string" column="_curtainRodRemark" />
+
+		<property name="curtainStyle" type="string" column="_curtainStyle" />
+		<property name="curtainHight" type="string" column="_curtainHight" />
+		<property name="curtainWidth" type="string" column="_curtainWidth" />
+		<property name="location" type="string" column="_location" />
+		<property name="hightLocation" type="string" column="_hightLocation" />
 		<property name="orderId" type="integer" column="_orderId" />
-		<property name="remark" type="string" column="_remark" />
 		<many-to-one name="order" class="com.zqw.bean.SaleOrderLst"
 			column="Order_id" cascade="none"></many-to-one>
 	</class>

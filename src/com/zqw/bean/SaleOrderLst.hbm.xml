@@ -16,7 +16,7 @@
 		<list name="goodsLst" cascade="all" lazy="false">
 			<key column="Order_id"></key>
 			<index column="index_"></index>
-			<one-to-many class="com.zqw.bean.SaleOrderGoods"/>
+			<one-to-many class="com.zqw.bean.SaleOrderGoods" />
 		</list>
 	</class>
 
