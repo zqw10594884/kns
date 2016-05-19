@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -43,6 +44,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import org.jfree.data.DataUtilities;
+import javax.swing.DropMode;
 
 public class SaleMain extends JFrame implements ListSelectionListener {
 
@@ -85,6 +87,9 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 	private String[] columnNames = { "位置", "形式", "高度位置", "高度", "宽度", "窗帘布",
 			"花边", "窗帘杆", "窗帘圈" };
 	private JComboBox curtainStyleCB;
+	private JComboBox comboBox;
+	private JComboBox comboBox_1;
+	private JComboBox comboBox_2;
 
 	/**
 	 * Launch the application.
@@ -113,8 +118,8 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 	}
 
 	private void initlatelyList() {
-		solLatelyLst = (List<SaleOrderLst>) DBUtil
-				.getLstClass("id", "", SaleOrderLst.class, "");
+		solLatelyLst = (List<SaleOrderLst>) DBUtil.getLstClass("id", "",
+				SaleOrderLst.class, "");
 		ArrayList<String> LatelyItem = new ArrayList<String>();
 		if (solLatelyLst != null) {
 			for (int i = 0; i < solLatelyLst.size(); i++) {
@@ -228,7 +233,11 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 		addCurtainGood = new JButton("添加货物");
 		addCurtainGood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addCurtainGoodActionPerformed(e);
+				if (currentSol.getCustomerName().length() > 0) {
+					addCurtainGoodActionPerformed(e);
+				} else {
+					JOptionPane.showMessageDialog(null, "请先输入用户信息");
+				}
 			}
 		});
 		addCurtainGood.setFont(new Font("宋体", Font.PLAIN, 14));
@@ -267,15 +276,15 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 		customerTel2.setBounds(351, 23, 86, 21);
 		panel_1.add(customerTel2);
 
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setBounds(277, 50, 93, 21);
 		panel_1.add(comboBox);
 
-		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(168, 50, 93, 21);
 		panel_1.add(comboBox_1);
 
-		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2 = new JComboBox();
 		comboBox_2.setBounds(54, 51, 93, 21);
 		panel_1.add(comboBox_2);
 
@@ -597,13 +606,28 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 		contentPane.add(curtainRodName);
 
 		curtainStyleCB = new JComboBox();
+		curtainStyleCB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				curtainStyleAction(e);
+			}
+		});
 		curtainStyleCB.setModel(new DefaultComboBoxModel(new String[] {
 				"打孔*1.7", "挂钩*1.5", "挂钩+0.5" }));
 		curtainStyleCB.setBounds(226, 157, 98, 21);
 		contentPane.add(curtainStyleCB);
 	}
 
+	protected void curtainStyleAction(ActionEvent e) {
+	}
+
 	private void submitAction(ActionEvent e) {
+		solLatelyLst.add(currentSol);
+		ArrayList<String> item = new ArrayList<String>();
+		for (int i = 0; i < solLatelyLst.size(); i++) {
+			item.add(solLatelyLst.get(i).getSimpleDate() + "   "
+					+ solLatelyLst.get(i).getCustomerName());
+		}
+		UIutil.initJlist(this, saleLatelyjList, item);
 		DBUtil.insert(currentSol);
 	}
 
@@ -614,8 +638,8 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 		List<SaleOrderGoods> goodsLst = new ArrayList<SaleOrderGoods>();
 		// 窗帘布
 		SaleOrderGoods sog = new SaleOrderGoods(curtainHight.getText().trim(),
-				width + "", curtainLocation.getText().trim(),
-				hightLocationCB.getSelectedIndex() + "", curtainStyle);
+				width + "", curtainLocation.getText().trim(), hightLocationCB
+						.getSelectedItem().toString() + "", curtainStyle);
 		sog.setClothSerialNumber(curtainClothName.getText().trim());
 		sog.setCurtainTapeSerialNumber(curtainTapeName.getText().trim());
 		sog.setCurtainLaceSerialNumber(curtainLaceName.getText().trim());
@@ -635,23 +659,25 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 
 		sog.setClothRemark(clothRemark.getText());
 		sog.setCurtainTapeRemark(curtainTapeRemark.getText());
-		sog.setClothRemark(curtainLaceRemark.getText());
-		sog.setClothRemark(curtainRingRemark.getText());
-		sog.setClothRemark(curtainRodRemark.getText());
+		sog.setCurtainLaceRemark(curtainLaceRemark.getText());
+		sog.setCurtainRingRemark(curtainRingRemark.getText());
+		sog.setCurtainRodRemark(curtainRodRemark.getText());
 
 		if ("打孔*1.7".equals(curtainStyle)) {
 			sog.setClothNumber(width * 1.7);
-			sog.setClothNumber(width * 1.7);
-			sog.setClothNumber(width * 1.7);
-			sog.setClothNumber(width * 1.7);
+			sog.setCurtainTapeNumber(width * 1.7);
+			sog.setCurtainLaceNumber(width * 1.7);
+			sog.setCurtainRingNumber((int)(width * 1.7 * 7));
 		} else if ("挂钩*1.5".equals(curtainStyle)) {
 			sog.setClothNumber(width * 1.5);
-			sog.setClothNumber(width * 1.5);
-			sog.setClothNumber(width * 1.5);
+			sog.setCurtainTapeNumber(width * 1.5);
+			sog.setCurtainLaceNumber(width * 1.5);
 		} else {
 			sog.setClothNumber(width + 0.5);
+			sog.setCurtainTapeNumber(width + 0.5);
+			sog.setCurtainLaceNumber(width + 0.5);
 		}
-		sog.setClothNumber(width);
+		sog.setCurtainRodNumber(width);
 		goodsLst.add(sog);
 
 		currentSol.setGoodsLst(goodsLst);
@@ -675,20 +701,22 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 
 	private void addCustomerActionPerformed(ActionEvent e) {
 
-		currentSol.setCustomerName(customerName.getText().trim());
-		currentSol.setCustomerTel1(customerTel1.getText().trim());
-		currentSol.setCustomerTel2(customerTel2.getText().trim());
-		currentSol.setCustomerDeposit(customerDeposit.getText().trim());
-		currentSol.setSubmitTime(new Date());
-
-		solLatelyLst.add(currentSol);
-		ArrayList<String> item = new ArrayList<String>();
-		for (int i = 0; i < solLatelyLst.size(); i++) {
-			item.add(solLatelyLst.get(i).getSimpleDate() + "   "
-					+ solLatelyLst.get(i).getCustomerName());
+		String address = comboBox.getSelectedItem().toString()
+				+ comboBox_1.getSelectedItem().toString()
+				+ comboBox_2.getSelectedItem().toString()
+				+ customerAdr.getText().trim();
+		if (address != null && customerName != null && customerTel1 != null
+				&& customerDeposit != null) {
+			currentSol.setCustomerName(customerName.getText().trim());
+			currentSol.setCustomerTel1(customerTel1.getText().trim());
+			currentSol.setCustomerTel2(customerTel2.getText().trim());
+			currentSol.setCustomerDeposit(customerDeposit.getText().trim());
+			currentSol.setCustomerAddress(address);
+			currentSol.setSubmitTime(new Date());
+		} else {
+			JOptionPane.showMessageDialog(null, "请完善客户信息");
 		}
-		UIutil.initJlist(this, saleLatelyjList, item);
-		DBUtil.insert(currentSol);
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -719,7 +747,6 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				tablemouseClicked(e);
-				
 			}
 		});
 		saleTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -735,7 +762,32 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 		int selectedRow = saleTable.getSelectedRow();
 		if (selectedRow != -1) {
 			SaleOrderGoods sog = currentSol.getGoodsLst().get(selectedRow);
-			ReflectionUtil.setField(sog, this);
+			// ReflectionUtil.setField(sog, this);
+
+			curtainClothName.setText(sog.getClothSerialNumber());
+			curtainTapeName.setText(sog.getCurtainTapeSerialNumber());
+			curtainLaceName.setText(sog.getCurtainLaceSerialNumber());
+			curtainRingName.setText(sog.getCurtainRingSerialNumber());
+			curtainRodName.setText(sog.getCurtainRodSerialNumber());
+
+			clothPrice.setText(sog.getClothSellingPrice() + "");
+			curtainTapePrice.setText(sog.getCurtainTapeSellingPrice() + "");
+			curtainLacePrice.setText(sog.getCurtainLaceSellingPrice() + "");
+			curtainRingPrice.setText(sog.getCurtainRingSellingPrice() + "");
+			curtainRodPrice.setText(sog.getCurtainRodSellingPrice() + "");
+
+			clothRemark.setText(sog.getClothRemark());
+			curtainTapeRemark.setText(sog.getCurtainTapeRemark());
+			curtainLaceRemark.setText(sog.getClothRemark());
+			curtainRingRemark.setText(sog.getClothRemark());
+			curtainRodRemark.setText(sog.getClothRemark());
+
+			curtainHight.setText(sog.getCurtainHight());
+			curtainWidth.setText(sog.getCurtainWidth());
+			curtainLocation.setText(sog.getLocation());
+			hightLocationCB.setSelectedItem(sog.getHightLocation());
+			curtainStyleCB.setSelectedItem(sog.getCurtainStyle());
+
 		}
 	}
 
@@ -761,6 +813,10 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 				}
 				int index = saleLatelyjList.getSelectedIndex();
 				currentSol = solLatelyLst.get(index);
+				customerName.setText(currentSol.getCustomerName());
+				customerTel1.setText(currentSol.getCustomerTel1());
+				customerTel2.setText(currentSol.getCustomerTel2());
+				customerDeposit.setText(currentSol.getCustomerDeposit());
 				for (int i = 0; i < currentSol.getGoodsLst().size(); i++) {
 					String[] rowValues = creatRow(currentSol.getGoodsLst().get(
 							i));
