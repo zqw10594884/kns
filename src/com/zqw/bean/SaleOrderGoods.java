@@ -36,7 +36,7 @@ public class SaleOrderGoods implements Serializable {
 	private int orderId;
 	private String curtainHight;
 	private String curtainWidth;
-	private String location;
+	private String curtainLocation;
 	private String hightLocation;
 	private String curtainStyle;
 	private SaleOrderLst order;
@@ -46,11 +46,11 @@ public class SaleOrderGoods implements Serializable {
 	}
 
 	public SaleOrderGoods(String curtainHight, String curtainWidth,
-			String location, String hightLocation, String curtainStyle) {
+			String curtainLocation, String hightLocation, String curtainStyle) {
 		super();
 		this.curtainHight = curtainHight;
 		this.curtainWidth = curtainWidth;
-		this.location = location;
+		this.curtainLocation = curtainLocation;
 		this.hightLocation = hightLocation;
 		this.curtainStyle = curtainStyle;
 	}
@@ -247,12 +247,13 @@ public class SaleOrderGoods implements Serializable {
 		this.curtainWidth = curtainWidth;
 	}
 
-	public String getLocation() {
-		return location;
+
+	public String getCurtainLocation() {
+		return curtainLocation;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setCurtainLocation(String curtainLocation) {
+		this.curtainLocation = curtainLocation;
 	}
 
 	public String getHightLocation() {

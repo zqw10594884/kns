@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Location {
 	private ArrayList<String> county;
-	private ArrayList<String> rural;
+	private ArrayList<String> address;
 	private ArrayList<String> residentialQuarters;
 
 	public ArrayList<String> getCounty() {
@@ -15,12 +15,12 @@ public class Location {
 		this.county = county;
 	}
 
-	public ArrayList<String> getRural() {
-		return rural;
+	public ArrayList<String> getAddress() {
+		return address;
 	}
 
-	public void setRural(ArrayList<String> rural) {
-		this.rural = rural;
+	public void setAddress(ArrayList<String> address) {
+		this.address = address;
 	}
 
 	public ArrayList<String> getResidentialQuarters() {
@@ -30,5 +30,4 @@ public class Location {
 	public void setResidentialQuarters(ArrayList<String> residentialQuarters) {
 		this.residentialQuarters = residentialQuarters;
 	}
-
 }

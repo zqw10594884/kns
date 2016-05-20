@@ -2,10 +2,16 @@ package com.zqw.ui;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -23,28 +29,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import com.zqw.bean.CurtainShopGoods;
 import com.zqw.bean.SaleOrderGoods;
 import com.zqw.bean.SaleOrderLst;
 import com.zqw.util.DBUtil;
-import com.zqw.util.ReflectionUtil;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-
-import org.jfree.data.DataUtilities;
-import javax.swing.DropMode;
 
 public class SaleMain extends JFrame implements ListSelectionListener {
 
@@ -90,6 +81,7 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 	private JComboBox comboBox;
 	private JComboBox comboBox_1;
 	private JComboBox comboBox_2;
+	private int selectedRow;
 
 	/**
 	 * Launch the application.
@@ -556,6 +548,7 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 		JButton curtainDelBtn = new JButton("删除");
 		curtainDelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		curtainDelBtn.setFont(new Font("宋体", Font.PLAIN, 14));
@@ -565,6 +558,7 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 		JButton curtainModifyBtn = new JButton("修改");
 		curtainModifyBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				curtainModifyAction(e);
 			}
 		});
 		curtainModifyBtn.setFont(new Font("宋体", Font.PLAIN, 14));
@@ -617,6 +611,10 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 		contentPane.add(curtainStyleCB);
 	}
 
+	protected void curtainModifyAction(ActionEvent e) {
+		saleOrderGoodsBuild(currentSol.getGoodsLst().get(selectedRow));
+	}
+
 	protected void curtainStyleAction(ActionEvent e) {
 	}
 
@@ -632,14 +630,25 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 	}
 
 	private void addCurtainGoodActionPerformed(ActionEvent e) {
+		List<SaleOrderGoods> goodsLst = new ArrayList<SaleOrderGoods>();
+		SaleOrderGoods sog = new SaleOrderGoods();
+		saleOrderGoodsBuild(sog);
+		goodsLst.add(sog);
+		currentSol.setGoodsLst(goodsLst);
+		String[] rowValues = creatRow(sog);
+		tableModel.addRow(rowValues);
+	}
+
+	private void saleOrderGoodsBuild(SaleOrderGoods sog) {
 		double width = Double.parseDouble(curtainWidth.getText().trim());
 		String curtainStyle = curtainStyleCB.getSelectedItem().toString();
 
-		List<SaleOrderGoods> goodsLst = new ArrayList<SaleOrderGoods>();
-		// 窗帘布
-		SaleOrderGoods sog = new SaleOrderGoods(curtainHight.getText().trim(),
-				width + "", curtainLocation.getText().trim(), hightLocationCB
-						.getSelectedItem().toString() + "", curtainStyle);
+		sog.setCurtainHight(curtainHight.getText().trim());
+		sog.setCurtainLocation(curtainLocation.getText().trim());
+		sog.setHightLocation(hightLocationCB.getSelectedItem().toString());
+		sog.setCurtainStyle(curtainStyle);
+		sog.setCurtainWidth(curtainWidth.getText().trim());
+
 		sog.setClothSerialNumber(curtainClothName.getText().trim());
 		sog.setCurtainTapeSerialNumber(curtainTapeName.getText().trim());
 		sog.setCurtainLaceSerialNumber(curtainLaceName.getText().trim());
@@ -667,7 +676,7 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 			sog.setClothNumber(width * 1.7);
 			sog.setCurtainTapeNumber(width * 1.7);
 			sog.setCurtainLaceNumber(width * 1.7);
-			sog.setCurtainRingNumber((int)(width * 1.7 * 7));
+			sog.setCurtainRingNumber((int) (width * 1.7 * 7));
 		} else if ("挂钩*1.5".equals(curtainStyle)) {
 			sog.setClothNumber(width * 1.5);
 			sog.setCurtainTapeNumber(width * 1.5);
@@ -678,16 +687,12 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 			sog.setCurtainLaceNumber(width + 0.5);
 		}
 		sog.setCurtainRodNumber(width);
-		goodsLst.add(sog);
-
-		currentSol.setGoodsLst(goodsLst);
-		String[] rowValues = creatRow(sog);
-		tableModel.addRow(rowValues);
+		
 	}
 
 	private String[] creatRow(SaleOrderGoods sog) {
 		String[] row = new String[columnNames.length];
-		row[0] = sog.getLocation();
+		row[0] = sog.getCurtainLocation();
 		row[1] = sog.getCurtainStyle();
 		row[2] = sog.getHightLocation();
 		row[3] = sog.getCurtainHight();
@@ -759,10 +764,9 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 
 	protected void tablemouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		int selectedRow = saleTable.getSelectedRow();
+		selectedRow = saleTable.getSelectedRow();
 		if (selectedRow != -1) {
 			SaleOrderGoods sog = currentSol.getGoodsLst().get(selectedRow);
-			// ReflectionUtil.setField(sog, this);
 
 			curtainClothName.setText(sog.getClothSerialNumber());
 			curtainTapeName.setText(sog.getCurtainTapeSerialNumber());
@@ -784,7 +788,7 @@ public class SaleMain extends JFrame implements ListSelectionListener {
 
 			curtainHight.setText(sog.getCurtainHight());
 			curtainWidth.setText(sog.getCurtainWidth());
-			curtainLocation.setText(sog.getLocation());
+			curtainLocation.setText(sog.getCurtainLocation());
 			hightLocationCB.setSelectedItem(sog.getHightLocation());
 			curtainStyleCB.setSelectedItem(sog.getCurtainStyle());
 
